@@ -17,6 +17,7 @@ startExpress = async() => {
   const app = express()
 
   var allowedOrigins = [
+    'https://electchain-scvs.herokuapp.com/',
     `https://electchain-scvs.herokuapp.com/${process.env.PORT}`,
     'http://localhost:8081'];
     
