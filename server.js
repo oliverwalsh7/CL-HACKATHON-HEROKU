@@ -19,7 +19,7 @@ startExpress = async() => {
   var allowedOrigins = [
     'https://electchain-scvs.herokuapp.com/',
     'http://localhost:8081'];
-
+    
   app.use(cors({
 
   origin: function(origin, callback){
@@ -38,6 +38,8 @@ startExpress = async() => {
 
   credentials: true,
 }));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
   app.get("*", cors({
 
