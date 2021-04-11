@@ -104,7 +104,7 @@ startExpress = async() => {
     res.send(resp)
   })
 
-  app.post('*', cors({
+  app.post('/*', cors({
 
     origin: function(origin, callback){
       // allow requests with no origin
