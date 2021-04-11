@@ -18,7 +18,7 @@ startExpress = async() => {
 
   var allowedOrigins = [
     'https://electchain-scvs.herokuapp.com/',
-    'http://localhost:8081'];
+    `http://localhost:808:${process.env.PORT}`];
     
   app.use(cors({
 
