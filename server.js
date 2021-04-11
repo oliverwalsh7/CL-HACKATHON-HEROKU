@@ -55,7 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
       return callback(null, true);
     },
   
-    exposedHeaders: ['Access-Control-Allow-Origin'],
+    exposedHeaders: ['Access-Control-Allow-Headers','Access-Control-Allow-Origin'],
   
     credentials: true,
   }), function(req, res) {
