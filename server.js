@@ -33,6 +33,7 @@ startExpress = async() => {
   app.use(allowCrossDomain);
 
   var allowedOrigins = [
+    'electchain-scvs.herokuapp.com',
     'https://electchain-scvs.herokuapp.com/',
     `https://electchain-scvs.herokuapp.com/${process.env.PORT}`,
     `https://electchain-scvs.herokuapp.com/${process.env.PWD}`,
@@ -67,7 +68,7 @@ startExpress = async() => {
       // (like mobile apps or curl requests)
       if(!origin) return callback(null, true);
       if(allowedOrigins.indexOf(origin) === -1){
-        var msg = 'The CORS policy for this site does not ' +
+        var msg = 'GET: The CORS policy for this site does not ' +
                   'allow access from the specified Origin.';
         return callback(new Error(msg), false);
       }
@@ -111,14 +112,14 @@ startExpress = async() => {
       // (like mobile apps or curl requests)
       if(!origin) return callback(null, true);
       if(allowedOrigins.indexOf(origin) === -1){
-        var msg = 'The CORS policy for this site does not ' +
+        var msg = 'POST: The CORS policy for this site does not ' +
                   'allow access from the specified Origin.';
         return callback(new Error(msg), false);
       }
       return callback(null, true);
     },
   
-    exposedHeaders: ['Access-Control-Allow-Origin'],
+    exposedHeaders: ['Access-Control-Allow-Headers','Access-Control-Allow-Origin'],
   
     credentials: true,
   }), function(req, res) {
