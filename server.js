@@ -12,15 +12,39 @@ var resp = ''
 // const host = 'localhost'
 // server.listen(port, host)
 // console.log(`Listening at http://${host}:${port}`)
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+  // intercept OPTIONS method
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  }
+  else {
+    next();
+  }
+};
 
 startExpress = async() => {
   const app = express()
+
+  app.configure(function () {
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+    app.use(app.router);
+    app.use(allowCrossDomain);
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  });
 
   var allowedOrigins = [
     'https://electchain-scvs.herokuapp.com/',
     `https://electchain-scvs.herokuapp.com/${process.env.PORT}`,
     `https://electchain-scvs.herokuapp.com/${process.env.PWD}`,
     'http://localhost:8081'];
+    
+    
+    app.use(allowCrossDomain)
     
     app.use(cors({
       
