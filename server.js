@@ -39,7 +39,7 @@ startExpress = async() => {
   credentials: true,
 }));
 
-app.use(express.static(path.join(__dirname, 'public/static')), express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/static')), express.static(path.join(__dirname, 'public')));
 
   app.get("/*", cors({
 
