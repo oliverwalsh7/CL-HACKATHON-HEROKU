@@ -17,7 +17,7 @@ startExpress = async() => {
   const app = express()
 
   var allowedOrigins = [
-    'https://electchain-scvs.herokuapp.com/'
+    'https://electchain-scvs.herokuapp.com/',
     'http://localhost:8081'];
 
   app.use(cors({
