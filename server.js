@@ -133,6 +133,15 @@ startExpress = async() => {
         dob='${URLParams.get('dob')}'`
       console.log(query)
       getDB(query)
+
+      query = `SELECT COUNT(*) from linktopia WHERE
+        ssn='${URLParams.get('/?ssn')}' AND
+        first_name='${URLParams.get('fname')}' AND
+        last_name='${URLParams.get('lname')}' AND
+        dob='${URLParams.get('dob')}' AND
+        address IS NULL`
+      getDB(query)
+
       console.log(res)
       res.send(resp)
     }})
