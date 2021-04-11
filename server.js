@@ -31,9 +31,6 @@ startExpress = async() => {
 
   app.configure(function () {
     app.use(allowCrossDomain);
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
-    app.use(app.router);
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   });
 
@@ -42,9 +39,6 @@ startExpress = async() => {
     `https://electchain-scvs.herokuapp.com/${process.env.PORT}`,
     `https://electchain-scvs.herokuapp.com/${process.env.PWD}`,
     'http://localhost:8081'];
-    
-    
-    app.use(allowCrossDomain)
     
     app.use(cors({
       
