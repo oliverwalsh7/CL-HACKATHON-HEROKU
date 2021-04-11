@@ -11,11 +11,6 @@ var resp = ''
 startExpress = async() => {
   const app = express()
   
-  app.configure(function () {
-    app.use(allowCrossDomain);
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-  });
-  
   // const server = http.createServer();
   // const port = 8081
   // const host = 'localhost'
@@ -34,32 +29,34 @@ startExpress = async() => {
       next();
     }
   };
-  
+
+  app.use(allowCrossDomain);
+
   var allowedOrigins = [
     'https://electchain-scvs.herokuapp.com/',
     `https://electchain-scvs.herokuapp.com/${process.env.PORT}`,
     `https://electchain-scvs.herokuapp.com/${process.env.PWD}`,
     'http://localhost:8081'];
     
-    app.use(cors({
-      
-      origin: function(origin, callback){
-        // allow requests with no origin
-        // (like mobile apps or curl requests)
-        if(!origin) return callback(null, true);
-        if(allowedOrigins.indexOf(origin) === -1){
-          var msg = 'The CORS policy for this site does not ' +
-          'allow access from the specified Origin.';
-          return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-      },
-      
-      exposedHeaders: ['Access-Control-Allow-Headers', 'Access-Control-Allow-Origin'],
-      
-      credentials: true,
-    }));
+  app.use(cors({
     
+    origin: function(origin, callback){
+      // allow requests with no origin
+      // (like mobile apps or curl requests)
+      if(!origin) return callback(null, true);
+      if(allowedOrigins.indexOf(origin) === -1){
+        var msg = 'The CORS policy for this site does not ' +
+        'allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    
+    exposedHeaders: ['Access-Control-Allow-Headers', 'Access-Control-Allow-Methods', 'Access-Control-Allow-Origin'],
+    
+    credentials: true,
+  }));
+  
   process.env.PWD = process.cwd();
   app.use(express.static(path.join(process.env.PWD, 'public')));
 
