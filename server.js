@@ -41,7 +41,7 @@ startExpress = async() => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-  app.get("*", cors({
+  app.get("/*", cors({
 
     origin: function(origin, callback){
       // allow requests with no origin
