@@ -97,6 +97,7 @@ startExpress = async() => {
     } else if (URLParams.get('type') == 3) {
       query = `SELECT * from linktopia WHERE
       address='${URLParams.get('address')}'`
+      console.log(URLParams.get('address'))
     }
     getDB(query)
     console.log(res)
